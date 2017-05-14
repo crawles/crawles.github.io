@@ -1,0 +1,47 @@
+
+.grid-set {
+	padding: $white-gap;
+	width: $desktop-width;
+	margin: 0 auto;
+}
+
+.grid-set .grid-top {
+	padding: $white-gap;
+	margin: $white-gap;
+}
+
+.grid-set .grid-bottom {
+	padding: $white-gap;
+	margin: $white-gap;
+}
+
+.grid-set .grid-main {
+	padding: $white-gap;
+	display: inline-block;
+	margin: $white-gap;
+	width: $tile-width * 2 + $white-gap * 5;
+	vertical-align:top;
+}
+
+.grid-set .grid-tail {
+	padding: $white-gap;
+	display: inline-block;
+	margin: $white-gap;
+	width: $tile-width + $white-gap + $white-gap;
+	vertical-align:top;
+}
+
+@media screen and (max-width: $desktop-width + $white-gap * 8)
+{
+	.grid {
+		width: auto !important;
+		display: block !important;
+	}
+
+	.home .grid {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+	}
+}

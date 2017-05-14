@@ -1,0 +1,55 @@
+div.tile {
+	margin: $white-gap;
+	width: $tile-width;
+	height: $tile-width;
+	position: relative;
+	box-shadow: 6px 6px 6px #e8e8e8;
+	display: inline-block;
+	
+	div.thumbnail {
+		float: none;
+		margin: 0px;
+
+		img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
+
+	div.story-line
+	{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+
+		width: 100%;
+
+		h3 {
+			padding: $white-gap*2;
+			padding-top: 20px;
+			margin: 0px;
+
+			/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+99&0+0,1+82 */
+			background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,1) 82%, rgba(0,0,0,1) 99%); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 82%,rgba(0,0,0,1) 99%); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,1) 82%,rgba(0,0,0,1) 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+
+
+			a {
+				text-decoration: none;
+				color: white;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: $desktop-width + $white-gap * 8)
+{
+	div.tile {
+		display: block;
+		width: auto !important;
+		height: auto !important;
+	}
+}

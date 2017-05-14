@@ -1,0 +1,36 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+// Font
+$base-font-family: "Open Sans", Helvetica, Arial, sans-serif;
+$base-font-size:   16px;
+$base-font-weight: 400;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.5;
+
+// Spacing
+$desktop-width: 910px;
+$text-color: #444444;
+$tile-width: 260px;
+$white-gap: 5px;
+
+// Colours
+$text-color:       #444444;
+$background-color: #ffffff;
+$brand-color:      #2a7ae2;
+$grey-color:       #828282;
+$grey-color-light: lighten($grey-color, 40%);
+$grey-color-dark:  darken($grey-color, 25%);
+
+// Import partials from `sass_dir` (defaults to `_sass`)
+@import
+    "body",
+    "grid",
+    "headline",
+    "tile",
+    "post",
+    "profile",
+    "syntax-highlighting"
+;

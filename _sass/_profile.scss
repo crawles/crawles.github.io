@@ -1,0 +1,43 @@
+.grid-profile {
+	padding: $white-gap * 2;
+	margin-bottom: $white-gap * 2;
+	padding-bottom: $white-gap * 2;
+	border-bottom: 1px solid $grey-color-light;
+
+	> div {
+		margin-top: $white-gap * 2;
+		margin-bottom: $white-gap * 4;
+	}
+
+	div.social-media{
+		text-align: right;		
+	}
+
+	a {
+		display: inline-block;
+		border: 0;
+	}
+
+	img.button {
+		width: 32px;
+		height: 32px;
+	}
+
+	img.profile {
+		width: 100%;
+	}
+
+	@media screen and (max-width: $desktop-width + $white-gap * 8)
+	{
+		img.profile {
+			width: 100%;
+		}
+	}	
+}
+
+
+
+.archive{
+	text-align: right;
+	margin: 0 $white-gap * 4;
+}

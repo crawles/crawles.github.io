@@ -1,0 +1,38 @@
+
+div.headline {
+	padding: $white-gap;
+	margin: $white-gap;
+	width: $tile-width;
+	display: inline-block;
+	min-height: 80px;
+	border-bottom: 1px solid $grey-color-light;
+
+	div.thumbnail {
+		float: right;
+		margin: 0px;
+		margin-left: 15px;
+
+		img {
+			width: 80px;
+			height: 80px;
+			box-shadow: 6px 6px 6px #e8e8e8;
+		}			
+	}
+
+	span
+	{
+		margin: 0px;
+
+		a {
+			text-decoration: none;
+		}
+	}
+}
+
+@media screen and (max-width: $desktop-width + $white-gap * 8)
+{
+	div.headline {
+		display: block;
+		width: auto !important;
+	}
+}

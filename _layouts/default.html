@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+		<div class="grid grid-set">
+			{% include grid-top.html %}
+			<div class="grid grid-bottom">
+				<div class="grid grid-main">
+					{{content}}
+				</div>
+				<div class="grid grid-tail">
+					{% include grid-profile.html %}
+					{% include grid-tail.html %}
+					<div class="archive"><a href="/archive">Archive</a></div>
+				</div>
+			</div>
+		</div>
+  </body>
+
+</html>

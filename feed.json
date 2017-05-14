@@ -1,0 +1,14 @@
+---
+layout: null
+---
+[
+  {% for post in site.posts limit:10 %}
+    {% if post.secret != true %}
+      {
+        "title": "{{ post.title }}",
+        "url": "{{ post.url }}",
+        "keywords": "{{ post.keywords }}"
+      }{% unless forloop.last %},{% endunless %}
+    {% endif %}
+  {% endfor %}
+]
