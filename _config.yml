@@ -6,7 +6,7 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: "Kahne Raja. Software Engineer. Musician. Traveller."
+title: "Chris Rawles.  Data Scientist. NBA fan."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://crawles.github.io" # the base hostname & protocol for your site
 permalink: /:title/
