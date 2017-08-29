@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Simple word recognition using dynamic time warping."
+title: "Speech recognition using dynamic time warping."
 feature: "dtw-speech.png"
 keywords: "Data Science. Dynamic Time Warping. Machine Learning. Python."
 published: true
