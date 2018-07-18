@@ -11,6 +11,8 @@ Logistic Regression is a staple of the data science workflow. It constructs a li
 Here is [the repo](https://github.com/crawles/logistic-regression-from-scratch) with the full code shown below.
 
 
+
+
 ## Why logistic regression?
 Although, in many applications Logistic Regression has been replaced by more advanced techniques such as ensemble tree-based methods (like gradient boosting) or by deep neural networks. However, it is still commonly used due to its simplicity and interpretability. For example, the algorithm is still a workhorse in some applications such as [credit risk](https://www.sciencedirect.com/science/article/pii/S1877050910002796) where legal considerations highly value its simplicity. 
 
@@ -102,6 +104,11 @@ Our model will run into difficulty trying to classify examples created from the 
 
 
 ## Feature crosses introduce nonlinearity
+
+*Edit:*
+*Regarding the term nonlinear. As some readers have pointed out, Logistic Regression is not linear as defined by the definition of linearity: when an input variable is changed, the change in the output is proportional to the change in the input. See the [sigmoid function](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/600px-Logistic-curve.svg.png), which is clearly nonlinear. See [this post](https://www.quora.com/Why-is-logistic-regression-considered-a-linear-model) for more info.*
+
+*However, Linear Regression is a [linear classifier](https://en.wikipedia.org/wiki/Linear_classifier) (which is what I'm referring to) as the prediction is based on the value of a linear combination of the inputs. By adding feature crosses you change this and thus are not restricted to a hyperplane decision boundary. Also if you are confused by term feature crosses... feature cross = interaction variable.*
 
 We can incorporate feature crosses to solve the XOR problem. This will give the classifier more to work with than just a "line" to seperate classes. Feature crosses allow us to build nonlinear decision boundaries, even though we are using a linear classifier, logistic regression.
 
