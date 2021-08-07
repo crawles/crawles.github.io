@@ -1,0 +1,11 @@
+I"F<p>We created a workflow to:</p>
+
+<ol>
+  <li>Create features and labels on a subsample of data using Pandas and train an initial model locally</li>
+  <li>Create features and labels on the full dataset using BigQuery</li>
+  <li>Utilize BigQuery ML to build a scalable machine learning model</li>
+  <li>(Advanced) Build a forecasting model using Recurrent Neural Networks in Keras and TensorFlow</li>
+</ol>
+
+<p><a href="https://cloud.google.com/blog/products/ai-machine-learning/how-to-quickly-solve-machine-learning-forecasting-problems-using-pandas-and-bigquery">Post here.</a></p>
+:ET

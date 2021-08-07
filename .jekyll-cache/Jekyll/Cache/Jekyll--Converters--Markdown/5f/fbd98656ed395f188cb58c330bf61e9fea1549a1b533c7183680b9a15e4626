@@ -1,0 +1,37 @@
+I"Á<p>Data scientists love Jupyter Notebook, Python, and Pandas. And they also write SQL. I created sql_magic to facilitate writing SQL code from Jupyter Notebook to use with both Apache Spark (or Hive) and relational databases such as PostgreSQL, MySQL, Pivotal Greenplum and HDB, and others. The library supports <a href="https://www.sqlalchemy.org/">SQLAlchemy</a> connection objects, <a href="http://initd.org/psycopg/">psycopg</a> connection objects, <a href="https://docs.databricks.com/spark/latest/gentle-introduction/sparksession.html">SparkSession and SQLContext</a> objects, and other connections types. The <code class="language-plaintext highlighter-rouge">%%read_sql</code> magic function returns results as a Pandas DataFrame for analysis and visualization.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%read_sql df_result
+SELECT {col_names}
+FROM {table_name}
+WHERE age &lt; 10
+</code></pre></div></div>
+
+<p>The sql_magic library expands upon current libraries such as <a href="https://github.com/catherinedevlin/ipython-sql">ipython-sql</a> with the following features:</p>
+
+<ul>
+  <li>Support for both Apache Spark and relational database connections simultaneously</li>
+  <li>Asynchronous execution (useful for long queries)</li>
+  <li>Browser notifications for query completion</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># installation
+pip install sql_magic
+</code></pre></div></div>
+
+<p>Check out the <a href="https://github.com/pivotal/sql_magic">GitHub repository</a> for more information.</p>
+
+<hr />
+
+<p>Links:</p>
+
+<ul>
+  <li><a href="https://github.com/pivotal/sql_magic">GitHub repository</a></li>
+  <li><a href="http://jupyter.org/">Jupyter Notebook</a></li>
+  <li><a href="http://pandas.pydata.org/">Pandas</a></li>
+  <li><a href="https://www.sqlalchemy.org/">SQLAlchemy</a></li>
+  <li><a href="https://pivotal.io/pivotal-greenplum">Pivotal Greenplum</a></li>
+  <li><a href="https://pivotal.io/pivotal-hdb">Pivotal HDB</a></li>
+  <li><a href="http://spark.apache.org/">Apache Spark</a></li>
+  <li><a href="https://github.com/catherinedevlin/ipython-sql">ipython-sql</a></li>
+</ul>
+:ET

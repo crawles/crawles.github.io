@@ -1,0 +1,151 @@
+I"�H<p>Logistic Regression is a staple of the data science workflow. It constructs a linear decision boundary and outputs a probability. Below, I show how to implement Logistic Regression with Stochastic Gradient Descent (SGD) in a few dozen lines of Python code, using NumPy. Then I will show how to build a nonlinear decision boundary with Logistic Regression by using feature crosses.</p>
+
+<p>Here is <a href="https://github.com/crawles/logistic-regression-from-scratch">the repo</a> with the full code shown below.</p>
+
+<h2 id="why-logistic-regression">Why logistic regression?</h2>
+<p>Although, in many applications Logistic Regression has been replaced by more advanced techniques such as ensemble tree-based methods (like gradient boosting) or by deep neural networks. However, it is still commonly used due to its simplicity and interpretability. For example, the algorithm is still a workhorse in some applications such as <a href="https://www.sciencedirect.com/science/article/pii/S1877050910002796">credit risk</a> where legal considerations highly value its simplicity.</p>
+
+<p>In addition, Logistic Regression is still important for many reasons including: it serves as a simple-to-train baseline, works well with sparse features, adds memorization capabilities, as in a <a href="https://ai.googleblog.com/2016/06/wide-deep-learning-better-together-with.html">wide and deep</a> model, and is simple and easy to implement.</p>
+
+<p>Finally it serves as a nice learning aid for deep learning, as logistic regression is equivalent to a neural network with no hidden layers. Like neural networks, you can train it using stochastic gradient descent.</p>
+
+<h3 id="always-start-with-a-baseline">Always start with a baseline</h3>
+
+<p>Baselines are important. Before you start building complex models, test your features on a simple model – this will save you valuable debugging time and help you figure out if there is indeed signal in your data.  The time to train Logistic Regression models (and ensemble methods such as Random Forest) is typically at least an order of magnitude faster than that of deep neural networks.</p>
+
+<p>It’s cheap to realize your data is crap or to debug data leakage on your simple model that takes seconds to train, rather than your complex one that takes minutes to hours.</p>
+
+<p>Finally, a baseline model gives you an initial target to beat. If you can’t beat your baseline with a complex model or you are just barely beating it, stick to your baseline or go back to the drawing board.</p>
+
+<h2 id="logistic-regression-in-numpy">Logistic Regression in NumPy</h2>
+<p>Here is the entire code to train Logistic Regression from scratch in Python.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">STEPS</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">LEARNING_RATE</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="k">def</span> <span class="nf">_sigmoid</span><span class="p">(</span><span class="n">logits</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">logits</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_sigmoid</span><span class="p">(</span><span class="n">logits</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">((</span><span class="n">pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="n">X</span><span class="p">).</span><span class="n">T</span><span class="o">/</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_next_batch</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">,:][</span><span class="n">features</span><span class="p">],</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">][</span><span class="s">'y'</span><span class="p">]</span>
+
+<span class="c1"># initialize
+</span><span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">BATCH_SIZE</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">random</span><span class="p">([</span><span class="n">N_FEATURES</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">STEPS</span><span class="p">:</span>
+
+    <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="o">=</span> <span class="n">get_next_batch</span><span class="p">(</span><span class="n">traindf</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">X_batch</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="n">dw</span> <span class="o">=</span> <span class="n">gradient</span><span class="p">(</span><span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">,</span> <span class="n">pred</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_FEATURES</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">W</span> <span class="o">-=</span> <span class="n">LEARNING_RATE</span><span class="o">*</span><span class="n">dw</span>
+    
+    <span class="n">start</span> <span class="o">+=</span> <span class="n">BATCH_SIZE</span>
+    <span class="n">end</span> <span class="o">+=</span> <span class="n">BATCH_SIZE</span>
+    <span class="n">LEARNING_RATE</span> <span class="o">*=</span> <span class="p">.</span><span class="mi">99</span>
+</code></pre></div></div>
+
+<p>Let’s walk through the key parts of the code. The forward call creates predictions by multiplying the model’s weights by our input vector containing our features (the input includes the bias value) and summing the result.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">_sigmoid</span><span class="p">(</span><span class="n">logits</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">logits</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">):</span>
+    <span class="n">logits</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_sigmoid</span><span class="p">(</span><span class="n">logits</span><span class="p">)[:,</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>In order to actually train the model, we need to iteratively update the weights at each step using the gradient approximation from each batch. The lecture notes from Andrew Ng’s <a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf">cs229 course</a> provide a nice derivation of the weight update step.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">pred</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">((</span><span class="n">pred</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="n">X</span><span class="p">).</span><span class="n">T</span><span class="o">/</span><span class="n">y</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>In our case, we will be using vanilla Stochastic Gradient Descent (SGD) for training out model. SGD is the workhorse for training our model. Alternatively, we could utilize more sophisticated optimizers such as Adam or Momentum Optimizers, which would likely converge faster.  Below if the iterative updating process for SGD.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">STEPS</span><span class="p">:</span>
+    <span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span> <span class="o">=</span> <span class="n">get_next_batch</span><span class="p">(</span><span class="n">traindf</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">X_batch</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="n">dw</span> <span class="o">=</span> <span class="n">gradient</span><span class="p">(</span><span class="n">X_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">,</span> <span class="n">pred</span><span class="p">).</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_FEATURES</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">W</span> <span class="o">-=</span> <span class="n">LEARNING_RATE</span><span class="o">*</span><span class="n">dw</span><span class="p">.</span> <span class="c1"># SGD update step
+</span></code></pre></div></div>
+
+<p>Let’s try our algorithm on a dataset consisting of two features and a linear separating boundary. It successfully learns a boundry to do so:</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch/blob/master/results/diag.gif?raw=true" alt="diag" /></p>
+
+<p>Our model will run into difficulty trying to classify examples created from the <a href="https://en.wikipedia.org/wiki/Exclusive_or">XOR function</a>.  There is no single line that can differentiate the two classes.</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch/blob/master/results/xor.gif?raw=true" alt="xor" /></p>
+
+<h2 id="feature-crosses-introduce-nonlinearity">Feature crosses introduce nonlinearity</h2>
+
+<p><em>Edit:</em>
+<em>Regarding the term nonlinear. As some readers have pointed out, Logistic Regression is not linear as defined by the definition of linearity: when an input variable is changed, the change in the output is proportional to the change in the input. See the <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/600px-Logistic-curve.svg.png">sigmoid function</a>, which is clearly nonlinear. See <a href="https://www.quora.com/Why-is-logistic-regression-considered-a-linear-model">this post</a> for more info.</em></p>
+
+<p><em>However, Linear Regression is a <a href="https://en.wikipedia.org/wiki/Linear_classifier">linear classifier</a> (which is what I’m referring to) as the prediction is based on the value of a linear combination of the inputs. By adding feature crosses you change this and thus are not restricted to a hyperplane decision boundary. Also if you are confused by term feature crosses… feature cross = interaction variable.</em></p>
+
+<p>We can incorporate feature crosses to solve the XOR problem. This will give the classifier more to work with than just a “line” to seperate classes. Feature crosses allow us to build nonlinear decision boundaries, even though we are using a linear classifier, logistic regression.</p>
+
+<p>This is important because many real world phenomena are nonlinear. I’ll show an intuitive example of feature crosses below on the titanic dataset.</p>
+
+<p>We can cross <code class="language-plaintext highlighter-rouge">f1</code> and <code class="language-plaintext highlighter-rouge">f2</code> by multiplying them together:</p>
+
+<p><code class="language-plaintext highlighter-rouge">df['f1f2'] = df['f1'] * df['f2']
+</code></p>
+
+<p>Let’s revisit the XOR problem using feature crosses:</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch//blob/master/results/xor_cross.gif?raw=true" alt="xor_cross" /></p>
+
+<p>Using additional crosses, we can solve even more shapes.</p>
+
+<p>A distribution created from a sinewave function:</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch//blob/master/results/sine.gif?raw=true" alt="sine" /></p>
+
+<p>The model can’t quite fit a box, but it’s better than without crosses, using just a line.</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch//blob/master/results/box.gif?raw=true" alt="box" /></p>
+
+<p>Just be careful of overfitting. Feature crosses, particularly for categorical variables, blow up the feature space and can be cause your model to overfit. Incorporating regularization becomes even more important.</p>
+
+<p>While this example is nice to view visually, let’s look at feature crosses on the Titanic dataset.</p>
+
+<h2 id="feature-crosses-intuitive-example-using-titanic">Feature crosses: Intuitive example using titanic</h2>
+<p>The titanic dataset is a rather morbid dataset, for predicting if a passenger will survive or die on the titanic cruiseliner. There are several features available, but I will just be using a couple:</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch/blob/master/results/titanic.png?raw=true" alt="titanic" /></p>
+
+<p>Using the logistic regression code I wrote above, I ran 100 trials:</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch/blob/master/results/titanic_auc.png?raw=true" alt="titanic" /></p>
+
+<p>Let’s cross <code class="language-plaintext highlighter-rouge">sex_male</code> with <code class="language-plaintext highlighter-rouge">age</code>. The hypothesis being that both age and gender, together, affected one’s likelihood to survive. We know gender and age by themselves are important - there is the line “women and children first” that was alledged to be said for who has access to life rafts. Thus <code class="language-plaintext highlighter-rouge">age</code> and <code class="language-plaintext highlighter-rouge">sex_male</code> are both negatively correlated with survival.</p>
+
+<p>However, what about gender for children? It wasn’t the case that girls were more likely to survive then boys.  Right now the model doesn’t encode this relationship. We need to cross the two features to create <code class="language-plaintext highlighter-rouge">age__x__sex_male</code>:</p>
+
+<p>After crossing these two columns, we get better AUC:</p>
+
+<p><img src="https://github.com/crawles/logistic-regression-from-scratch/blob/master/results/titanic_crossed_auc.png?raw=true" alt="titanic" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Logistic regression is relatively simple to implement from scratch. Though it’s been around for decades, it still is heavily utilized and serves as a nice instructional tool for learning more advanced techniques like neural networks. Finally, though it’s a linear classifier, logistic regression can create nonlinear decision boundaries if input features are crossed.</p>
+
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+  <li><a href="https://www.tensorflow.org/api_docs/python/tf/feature_column/crossed_column">Feature Crosses in TensorFlow</a>, <a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">Scikit-Learn</a></li>
+  <li>Try feature crosses (and training deep neural networks) interactively with <a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.23768&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">TensorFlow playground</a>.</li>
+  <li>Quora answer on <a href="https://www.quora.com/Why-is-logistic-regression-considered-a-linear-model">linearity and logistic regression</a></li>
+</ul>
+:ET

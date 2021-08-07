@@ -1,0 +1,15 @@
+I"<p><a href="https://towardsdatascience.com/how-to-normalize-features-in-tensorflow-5b7b0e3a4177">Post here.</a></p>
+
+<p><em>TL;DR</em>
+<em>When using tf.estimator, use the normalizer_fn argument in tf.feature_column.numeric_feature to normalize using the same parameters (mean, std, etc.) for training, evaluation, and serving.</em></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">zscore</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+  <span class="n">mean</span> <span class="o">=</span> <span class="mf">3.04</span>
+  <span class="n">std</span> <span class="o">=</span> <span class="mf">1.2</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">col</span> <span class="err">—</span> <span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="n">std</span>
+<span class="n">feature_name</span> <span class="o">=</span> <span class="err">‘</span><span class="n">total_bedrooms</span><span class="err">’</span>
+<span class="n">normalized_feature</span> <span class="o">=</span> <span class="n">tf</span><span class="p">.</span><span class="n">feature_column</span><span class="p">.</span><span class="n">numeric_column</span><span class="p">(</span>
+  <span class="n">feature_name</span><span class="p">,</span>
+  <span class="n">normalizer_fn</span><span class="o">=</span><span class="n">zscore</span><span class="p">)</span>
+</code></pre></div></div>
+:ET

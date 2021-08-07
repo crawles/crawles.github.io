@@ -1,0 +1,4 @@
+I"“<p>Perhaps the most powerful tool for combatting the vanishing and exploding gradients in deep neural networks is Batch Normalization. I show how to use tf.keras and TensorFlow to implement Batch Normalization.</p>
+
+<p>View the <a href="https://towardsdatascience.com/how-to-use-batch-normalization-with-tensorflow-and-tf-keras-to-train-deep-neural-networks-faster-60ba4d054b73">full post here</a>.</p>
+:ET

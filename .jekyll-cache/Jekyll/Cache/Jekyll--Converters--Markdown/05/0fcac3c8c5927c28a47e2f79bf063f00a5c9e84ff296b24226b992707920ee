@@ -1,0 +1,4 @@
+I"e<p>Training ML models in the cloud makes a lot of sense. Why? Among many reasons, it allows you to train on large amounts of data with plentiful compute and perhaps train many models in parallel. Plus it’s not hard to do! On Google Cloud Platform, you can use Cloud ML Engine to train machine learning models in TensorFlow and other Python ML libraries (such as scikit-learn) without having to manage any infrastructure. In order to do this, you will need to put your code into a Python package (i.e. add setup.py and <strong>init</strong>.py files). In addition, it is a best practice to organize your code into a model.py and task.py. In this blog post, I will step you through what this involves.</p>
+
+<p>View the <a href="https://towardsdatascience.com/how-to-train-machine-learning-models-in-the-cloud-using-cloud-ml-engine-3f0d935294b3">full post here</a>.</p>
+:ET

@@ -1,0 +1,2 @@
+I"„<p>Logistic Regression is a staple of the data science workflow. It constructs a linear decision boundary and outputs a probability. Below, I show how to implement Logistic Regression with Stochastic Gradient Descent (SGD) in a few dozen lines of Python code, using NumPy. Then I will show how to build a nonlinear decision boundary with Logistic Regression by using feature crosses.</p>
+:ET
