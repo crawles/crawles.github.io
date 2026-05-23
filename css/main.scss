@@ -122,6 +122,7 @@ a {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--border);
+  object-position: center top;
   }
 }
 
@@ -238,13 +239,13 @@ a {
 .pub-list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 16px;
 }
 
 .pub {
   display: flex;
   gap: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 16px;
   border-bottom: 1px solid #f0f0f0;
 
   &:last-child {
