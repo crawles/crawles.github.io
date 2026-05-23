@@ -184,6 +184,23 @@ a {
   }
 }
 
+.bio-link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 5px 13px;
+  border-radius: 20px;
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+}
+
 /* ============================================================
    Sections
    ============================================================ */
