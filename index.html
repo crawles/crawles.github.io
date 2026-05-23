@@ -1,20 +1,141 @@
 ---
-layout: home
+layout: default
+title: Home
 ---
+<div class="container">
 
+  <section class="bio" id="about">
+    <div class="bio-photo">
+      <img src="{{ site.baseurl }}/assets/global/profile.jpg" alt="Chris Rawles">
+    </div>
+    <div class="bio-text">
+      <h1>Chris Rawles</h1>
+      <p class="bio-title">Staff Research Engineer &middot; <a href="https://deepmind.google">Google DeepMind</a></p>
+      <p>
+        I work on LLM agents that operate computers. I'm currently on the Gemini Thinking &amp; Reasoning team,
+        focused on coding agents. Previously I led the
+        <a href="https://google-research.github.io/android_world/">AndroidWorld</a> and
+        <a href="https://arxiv.org/abs/2307.10088">Android in the Wild</a> projects &mdash;
+        large-scale benchmarks and datasets for autonomous device-control agents.
+      </p>
+      <p>
+        Before research I was a software engineer at Google and Pivotal. I hold a B.A. from UC Berkeley.
+      </p>
+      <div class="bio-links">
+        <a href="https://scholar.google.com/citations?user=wINI4kcAAAAJ&hl=en">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 10a8 8 0 0 1 7.162 3.44L24 9.5z"/></svg>
+          Scholar
+        </a>
+        <a href="https://github.com/crawles">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+        <a href="https://x.com/thecrawles">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Twitter / X
+        </a>
+        <a href="https://www.linkedin.com/in/chris-rawles-50854826/">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
 
-	{% for post in site.posts limit: 25 %}
-		{% if post.secret != true %}
-			<div class="tile">
-				<div class="thumbnail">
-					<a href="{{ post.url | prepend: site.baseurl }}">
-						<img src="{{ site.baseurl }}/assets/post/thumbnail/{{ post.feature }}" alt="{{ post.title }}"></a>
-				</div>
-				<div class="story-line">
-					<h3>
-						<a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-					</h3>
-				</div>
-        	</div>
-		{% endif %}
-	{% endfor %}
+  <section class="section" id="news">
+    <h2>News</h2>
+    <ul class="news-list">
+      <li>
+        <span class="news-date">Jul 2025</span>
+        Contributed to the <a href="https://arxiv.org/abs/2507.06261">Gemini 2.5</a> technical report &mdash; state-of-the-art on coding, reasoning, and agentic benchmarks.
+      </li>
+      <li>
+        <span class="news-date">Jan 2025</span>
+        <a href="https://arxiv.org/abs/2405.14573">AndroidWorld</a> accepted at <strong>ICLR 2025</strong>.
+      </li>
+      <li>
+        <span class="news-date">Dec 2024</span>
+        <a href="https://arxiv.org/abs/2406.03679">On the Effects of Data Scale on UI Control Agents</a> accepted at <strong>NeurIPS 2024</strong>.
+      </li>
+      <li>
+        <span class="news-date">Dec 2023</span>
+        <a href="https://arxiv.org/abs/2307.10088">Android in the Wild</a> presented at <strong>NeurIPS 2023</strong>.
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" id="publications">
+    <h2>Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub">
+        <div class="pub-content">
+          <p class="pub-title">
+            <a href="https://arxiv.org/abs/2507.06261">Gemini 2.5: Pushing the Frontier with Advanced Reasoning, Multimodality, Long Context, and Next Generation Agentic Capabilities</a>
+          </p>
+          <p class="pub-authors">Gemini Team, Google DeepMind (incl. <strong>C. Rawles</strong>)</p>
+          <p class="pub-venue">arXiv &middot; 2025</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2507.06261">paper</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-content">
+          <p class="pub-title">
+            <a href="https://arxiv.org/abs/2405.14573">AndroidWorld: A Dynamic Benchmarking Environment for Autonomous Agents</a>
+          </p>
+          <p class="pub-authors"><strong>C. Rawles</strong>, S. Clinckemaillie, Y. Chang, J. Waltz, G. Lau, M. Fair, A. Li, W. Bishop, W. Li, F. Campbell-Ajala, et al.</p>
+          <p class="pub-venue">ICLR 2025</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2405.14573">paper</a>
+            <a href="https://github.com/google-research/android_world">code</a>
+            <a href="https://google-research.github.io/android_world/">project</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-content">
+          <p class="pub-title">
+            <a href="https://arxiv.org/abs/2406.03679">On the Effects of Data Scale on UI Control Agents</a>
+          </p>
+          <p class="pub-authors">W. Li, W. Bishop, A. Li, <strong>C. Rawles</strong>, F. Campbell-Ajala, D. Tyamagundlu, et al.</p>
+          <p class="pub-venue">NeurIPS 2024</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2406.03679">paper</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-content">
+          <p class="pub-title">
+            <a href="https://arxiv.org/abs/2405.11120">Latent State Estimation Helps UI Agents to Reason</a>
+          </p>
+          <p class="pub-authors">W. Bishop, A. Li, <strong>C. Rawles</strong>, O. Riva</p>
+          <p class="pub-venue">arXiv &middot; 2024</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2405.11120">paper</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-content">
+          <p class="pub-title">
+            <a href="https://arxiv.org/abs/2307.10088">Android in the Wild: A Large-Scale Dataset for Android Device Control</a>
+          </p>
+          <p class="pub-authors"><strong>C. Rawles</strong>, A. Li, D. Rodriguez, O. Riva, T. Lillicrap</p>
+          <p class="pub-venue">NeurIPS 2023</p>
+          <div class="pub-links">
+            <a href="https://arxiv.org/abs/2307.10088">paper</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
