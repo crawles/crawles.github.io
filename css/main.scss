@@ -188,7 +188,7 @@ a {
   font-size: 13px;
   color: var(--text-light);
   margin-bottom: 20px;
-  [data-user]::before { content: attr(data-user) "@" attr(data-domain); }
+  [data-user]::before { content: attr(data-user) " [at] " attr(data-domain) " (dot) " attr(data-tld); }
 }
 
 /* ============================================================
