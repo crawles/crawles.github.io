@@ -1,15 +1,15 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
-
-# Site settings
 title: "Chris Rawles"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://crawles.github.io" # the base hostname & protocol for your site
+description: "Staff Research Engineer at Google DeepMind"
+baseurl: ""
+url: "https://crawles.github.io"
 permalink: /:title/
 encoding: utf-8
-# Build settings
 markdown: kramdown
+
+author:
+  name: Chris Rawles
+  title: Staff Research Engineer, Google DeepMind
+  github: crawles
+  twitter: thecrawles
+  linkedin: chris-rawles-50854826
+  scholar: "https://scholar.google.com/citations?user=wINI4kcAAAAJ&hl=en"

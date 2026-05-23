@@ -1,36 +1,344 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 ---
 @charset "utf-8";
 
-// Font
-$base-font-family: "Open Sans", Helvetica, Arial, sans-serif;
-$base-font-size:   16px;
-$base-font-weight: 400;
-$small-font-size:  $base-font-size * 0.875;
-$base-line-height: 1.5;
+/* ============================================================
+   Base reset & variables
+   ============================================================ */
 
-// Spacing
-$desktop-width: 910px;
-$text-color: #444444;
-$tile-width: 260px;
-$white-gap: 5px;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-// Colours
-$text-color:       #444444;
-$background-color: #ffffff;
-$brand-color:      #2a7ae2;
-$grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
+:root {
+  --text:        #1a1a1a;
+  --text-muted:  #555;
+  --text-light:  #888;
+  --accent:      #1a56db;
+  --accent-bg:   #eef3fd;
+  --accent-border: #c3d5f8;
+  --border:      #e5e5e5;
+  --bg:          #ffffff;
+  --nav-height:  56px;
+}
 
-// Import partials from `sass_dir` (defaults to `_sass`)
-@import
-    "body",
-    "grid",
-    "headline",
-    "tile",
-    "post",
-    "profile",
-    "syntax-highlighting"
-;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + 16px);
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+/* ============================================================
+   Nav
+   ============================================================ */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  height: var(--nav-height);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.nav-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  &:hover { text-decoration: none; color: var(--accent); }
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  a {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+    &:hover { color: var(--text); text-decoration: none; }
+  }
+}
+
+/* ============================================================
+   Layout container
+   ============================================================ */
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   Bio / header section
+   ============================================================ */
+
+.bio {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  padding: 64px 0 52px;
+  border-bottom: 1px solid var(--border);
+}
+
+.bio-photo {
+  flex-shrink: 0;
+  img {
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+  }
+}
+
+.bio-text {
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+}
+
+.bio-title {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  a {
+    color: var(--text-muted);
+    &:hover { color: var(--accent); text-decoration: none; }
+  }
+}
+
+.bio-text p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.bio-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 5px 13px;
+    border-radius: 20px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+    &:hover {
+      color: var(--accent);
+      border-color: var(--accent-border);
+      background: var(--accent-bg);
+      text-decoration: none;
+    }
+  }
+}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+
+.section {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--border);
+
+  h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 28px;
+  }
+}
+
+/* ============================================================
+   News
+   ============================================================ */
+
+.news-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+  }
+}
+
+.news-date {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+  font-variant-numeric: tabular-nums;
+  min-width: 64px;
+  padding-top: 2px;
+}
+
+/* ============================================================
+   Publications
+   ============================================================ */
+
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.pub {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #f0f0f0;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.pub-content { flex: 1; }
+
+.pub-title {
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 5px;
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+    &:hover { color: var(--accent); }
+  }
+}
+
+.pub-authors {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 3px;
+}
+
+.pub-venue {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.pub-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  a {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent-border);
+    padding: 2px 9px;
+    border-radius: 4px;
+    background: var(--accent-bg);
+    transition: background 0.15s, border-color 0.15s;
+    &:hover {
+      background: #dce8fb;
+      border-color: #a0bef5;
+      text-decoration: none;
+    }
+  }
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+footer {
+  padding: 36px 0;
+}
+
+.footer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+  p {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 600px) {
+  .bio {
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px 0 36px;
+  }
+  .bio-photo img {
+    width: 110px;
+    height: 110px;
+  }
+  .bio-text h1 { font-size: 22px; }
+  .nav-links { gap: 18px; }
+  .news-list li { flex-direction: column; gap: 2px; }
+  .news-date { min-width: unset; }
+}
